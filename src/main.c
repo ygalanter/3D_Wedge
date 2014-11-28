@@ -40,20 +40,15 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed)
     
    
 }  
+
   
-
-void init_timer(){
-  tick_timer_service_subscribe(MINUTE_UNIT, (TickHandler) tick_handler);
-}
-
-void destroy_timer(){
-   tick_timer_service_unsubscribe(); 
-}
 
 int main() {
   show_face();
-  init_timer();
+  tick_timer_service_subscribe(MINUTE_UNIT, (TickHandler) tick_handler);
+  bluetooth_connection_service_subscribe(display_bt_layer);
   app_event_loop();
-  destroy_timer();
+  bluetooth_connection_service_unsubscribe();
+  tick_timer_service_unsubscribe(); 
   return 0;
 }

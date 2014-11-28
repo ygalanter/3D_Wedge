@@ -13,11 +13,12 @@ static TextLayer *s_textlayer_battery;
 static TextLayer *s_textlayer_date;
 static TextLayer *s_textlayer_dow;
 static TextLayer *s_textlayer_ampm;
+static TextLayer *s_textlayer_bt;
 
 static void initialise_ui(void) {
   s_window = window_create();
   window_set_background_color(s_window, GColorBlack);
-  window_set_fullscreen(s_window, 1);
+  window_set_fullscreen(s_window, true);
   
   s_res_image_back = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACK);
   s_res_wedgie_regular_45 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_WEDGIE_REGULAR_45));
@@ -73,6 +74,12 @@ static void initialise_ui(void) {
   text_layer_set_text(s_textlayer_ampm, "AM");
   text_layer_set_font(s_textlayer_ampm, s_res_gothic_24_bold);
   layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_ampm);
+  
+  // s_textlayer_bt
+  s_textlayer_bt = text_layer_create(GRect(0, 1, 83, 34));
+  text_layer_set_background_color(s_textlayer_bt, GColorClear);
+  text_layer_set_text(s_textlayer_bt, "Bluetooth disconnected");
+  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_bt);
 }
 
 static void destroy_ui(void) {
@@ -84,6 +91,7 @@ static void destroy_ui(void) {
   text_layer_destroy(s_textlayer_date);
   text_layer_destroy(s_textlayer_dow);
   text_layer_destroy(s_textlayer_ampm);
+  text_layer_destroy(s_textlayer_bt);
   gbitmap_destroy(s_res_image_back);
   fonts_unload_custom_font(s_res_wedgie_regular_45);
 }
@@ -117,3 +125,12 @@ void set_texts(char hours[], char minutes[], char battery[], char date[], char d
   text_layer_set_text(s_textlayer_ampm, ampm);
  }
 
+// show bt connected/disconnected
+void display_bt_layer(bool connected) {
+  vibes_double_pulse();
+  if (connected) {
+    text_layer_set_text_color(s_textlayer_bt, GColorBlack);
+  } else {
+    text_layer_set_text_color(s_textlayer_bt, GColorWhite);
+  }
+}
