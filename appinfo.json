@@ -1,0 +1,31 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "yuri@galanter.net",
+    "longName": "3D Wedge",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/back.png",
+                "name": "IMAGE_BACK",
+                "type": "png"
+            },
+            {
+                "characterRegex": "[0-9]",
+                "file": "fonts/Wedgie Regular.ttf",
+                "name": "WEDGIE_REGULAR_45",
+                "type": "font"
+            }
+        ]
+    },
+    "shortName": "3D Wedge",
+    "uuid": "055786b1-d027-4bdc-bf29-d3f9e7707fc5",
+    "versionCode": 1,
+    "versionLabel": "1.1",
+    "watchapp": {
+        "watchface": true
+    }
+}
