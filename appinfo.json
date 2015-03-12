@@ -16,15 +16,26 @@
             {
                 "characterRegex": "[0-9]",
                 "file": "fonts/Wedgie Regular.ttf",
+                "name": "WEDGIE_REGULAR_44",
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9]",
+                "file": "fonts/Wedgie Regular.ttf",
                 "name": "WEDGIE_REGULAR_45",
                 "type": "font"
             }
         ]
     },
+    "sdkVersion": "3",
     "shortName": "3D Wedge",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "uuid": "055786b1-d027-4bdc-bf29-d3f9e7707fc5",
     "versionCode": 1,
-    "versionLabel": "1.2",
+    "versionLabel": "2.0",
     "watchapp": {
         "watchface": true
     }

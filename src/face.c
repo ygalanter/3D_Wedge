@@ -1,7 +1,6 @@
-#include "face.h"
 #include <pebble.h>
+#include "face.h"
 
-// BEGIN AUTO-GENERATED UI CODE; DO NOT MODIFY
 static Window *s_window;
 static GBitmap *s_res_image_back;
 static GFont s_res_wedgie_regular_45;
@@ -21,7 +20,7 @@ static void initialise_ui(void) {
   window_set_fullscreen(s_window, true);
   
   s_res_image_back = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACK);
-  s_res_wedgie_regular_45 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_WEDGIE_REGULAR_45));
+  s_res_wedgie_regular_45 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_WEDGIE_REGULAR_44));
   s_res_gothic_24_bold = fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD);
   // s_bitmaplayer_back
   s_bitmaplayer_back = bitmap_layer_create(GRect(0, 0, 144, 168));
@@ -76,10 +75,23 @@ static void initialise_ui(void) {
   layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_ampm);
   
   // s_textlayer_bt
-  s_textlayer_bt = text_layer_create(GRect(0, 1, 83, 34));
+  s_textlayer_bt = text_layer_create(GRect(0, 0, 0, 0));
   text_layer_set_background_color(s_textlayer_bt, GColorClear);
   text_layer_set_text(s_textlayer_bt, "Bluetooth disconnected");
   layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_bt);
+  
+  
+  #ifdef PBL_COLOR
+     text_layer_set_text_color(s_textlayer_minutes, GColorPastelYellow);
+     text_layer_set_text_color(s_textlayer_hours, GColorPastelYellow);
+     text_layer_set_text_color(s_textlayer_bt, GColorOrange); 
+  #else
+     text_layer_set_text_color(s_textlayer_minutes, GColorWhite);
+     text_layer_set_text_color(s_textlayer_hours, GColorWhite);
+     text_layer_set_text_color(s_textlayer_bt, GColorWhite);
+  #endif
+  
+  
 }
 
 static void destroy_ui(void) {
@@ -95,7 +107,7 @@ static void destroy_ui(void) {
   gbitmap_destroy(s_res_image_back);
   fonts_unload_custom_font(s_res_wedgie_regular_45);
 }
-// END AUTO-GENERATED UI CODE
+
 
 static void handle_window_unload(Window* window) {
   destroy_ui();
@@ -129,8 +141,8 @@ void set_texts(char hours[], char minutes[], char battery[], char date[], char d
 void display_bt_layer(bool connected) {
   vibes_double_pulse();
   if (connected) {
-    text_layer_set_text_color(s_textlayer_bt, GColorBlack);
+    layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(0, 0, 0, 0));
   } else {
-    text_layer_set_text_color(s_textlayer_bt, GColorWhite);
+    layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(0, 1, 83, 34));
   }
 }

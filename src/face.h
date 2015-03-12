@@ -1,4 +1,5 @@
-#include <stdbool.h>
+#pragma once
+#include <pebble.h>
 
 void show_face(void);
 void hide_face(void);
