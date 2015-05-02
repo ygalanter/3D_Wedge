@@ -17,7 +17,6 @@ static TextLayer *s_textlayer_bt;
 static void initialise_ui(void) {
   s_window = window_create();
   window_set_background_color(s_window, GColorBlack);
-  window_set_fullscreen(s_window, true);
   
   s_res_image_back = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACK);
   s_res_wedgie_regular_45 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_WEDGIE_REGULAR_44));
