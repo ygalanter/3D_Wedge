@@ -9,9 +9,16 @@
     "resources": {
         "media": [
             {
-                "file": "images/back.png",
-                "name": "IMAGE_BACK",
+                "file": "images/menu.png",
+                "menuIcon": true,
+                "name": "MENU",
                 "type": "png"
+            },
+            {
+                "characterRegex": "[0-9]",
+                "file": "fonts/Wedgie Regular.ttf",
+                "name": "WEDGIE_REGULAR_45",
+                "type": "font"
             },
             {
                 "characterRegex": "[0-9]",
@@ -20,10 +27,9 @@
                 "type": "font"
             },
             {
-                "characterRegex": "[0-9]",
-                "file": "fonts/Wedgie Regular.ttf",
-                "name": "WEDGIE_REGULAR_45",
-                "type": "font"
+                "file": "images/back.png",
+                "name": "IMAGE_BACK",
+                "type": "png"
             }
         ]
     },
@@ -34,8 +40,7 @@
         "basalt"
     ],
     "uuid": "055786b1-d027-4bdc-bf29-d3f9e7707fc5",
-    "versionCode": 1,
-    "versionLabel": "2.1",
+    "versionLabel": "2.2",
     "watchapp": {
         "watchface": true
     }
