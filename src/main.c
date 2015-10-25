@@ -12,7 +12,7 @@ char buffer_ampm[]="AM";
 void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 {
   
-    if (!clock_is_24h_style()) {
+   if (!clock_is_24h_style()) {
     
         if( tick_time->tm_hour > 11 ) {   // YG Jun-25-2014: 0..11 - am 12..23 - pm
             strcpy(buffer_ampm, "PM" );

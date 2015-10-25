@@ -9,12 +9,6 @@
     "resources": {
         "media": [
             {
-                "file": "images/menu.png",
-                "menuIcon": true,
-                "name": "MENU",
-                "type": "png"
-            },
-            {
                 "characterRegex": "[0-9]",
                 "file": "fonts/Wedgie Regular.ttf",
                 "name": "WEDGIE_REGULAR_45",
@@ -30,6 +24,12 @@
                 "file": "images/back.png",
                 "name": "IMAGE_BACK",
                 "type": "png"
+            },
+            {
+                "file": "images/menu.png",
+                "menuIcon": true,
+                "name": "MENU",
+                "type": "png"
             }
         ]
     },
@@ -37,10 +37,11 @@
     "shortName": "3D Wedge",
     "targetPlatforms": [
         "aplite",
-        "basalt"
+        "basalt",
+        "chalk"
     ],
     "uuid": "055786b1-d027-4bdc-bf29-d3f9e7707fc5",
-    "versionLabel": "2.2",
+    "versionLabel": "2.5",
     "watchapp": {
         "watchface": true
     }

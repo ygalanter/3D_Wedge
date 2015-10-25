@@ -18,66 +18,108 @@ static void initialise_ui(void) {
   s_window = window_create();
   window_set_background_color(s_window, GColorBlack);
   
+  Layer *win_layer = window_get_root_layer(s_window);
+  GRect bounds = layer_get_bounds(win_layer);
+  
+  #ifdef PBL_PLATFORM_APLITE
+    bounds.size.h += 16;
+  #endif  
+
+  
   s_res_image_back = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACK);
   s_res_wedgie_regular_45 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_WEDGIE_REGULAR_44));
-  s_res_gothic_24_bold = fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD);
+  #ifdef PBL_RECT
+    s_res_gothic_24_bold = fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD);
+  #else
+    s_res_gothic_24_bold = fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD);
+  #endif  
+  
+
   // s_bitmaplayer_back
-  s_bitmaplayer_back = bitmap_layer_create(GRect(0, 0, 144, 168));
+  s_bitmaplayer_back = bitmap_layer_create(bounds);
   bitmap_layer_set_bitmap(s_bitmaplayer_back, s_res_image_back);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_bitmaplayer_back);
+  layer_add_child(win_layer, bitmap_layer_get_layer(s_bitmaplayer_back));
   
   // s_textlayer_minutes
-  s_textlayer_minutes = text_layer_create(GRect(34, 83, 110, 51));
+  #ifdef PBL_RECT
+    s_textlayer_minutes = text_layer_create(GRect(34, 83, 110, 51));
+  #else
+    s_textlayer_minutes = text_layer_create(GRect(54, 83, 110, 51));
+  #endif  
   text_layer_set_background_color(s_textlayer_minutes, GColorClear);
   text_layer_set_text_color(s_textlayer_minutes, GColorWhite);
   text_layer_set_text(s_textlayer_minutes, "00");
   text_layer_set_text_alignment(s_textlayer_minutes, GTextAlignmentCenter);
   text_layer_set_font(s_textlayer_minutes, s_res_wedgie_regular_45);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_minutes);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_minutes));
   
   // s_textlayer_hours
-  s_textlayer_hours = text_layer_create(GRect(9, 40, 125, 49));
+  #ifdef PBL_RECT
+    s_textlayer_hours = text_layer_create(GRect(9, 40, 125, 49));
+  #else
+    s_textlayer_hours = text_layer_create(GRect(29, 40, 125, 49));
+  #endif  
   text_layer_set_background_color(s_textlayer_hours, GColorClear);
   text_layer_set_text_color(s_textlayer_hours, GColorWhite);
   text_layer_set_text(s_textlayer_hours, "00");
   text_layer_set_font(s_textlayer_hours, s_res_wedgie_regular_45);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_hours);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_hours));
   
   // s_textlayer_battery
-  s_textlayer_battery = text_layer_create(GRect(1, 142, 56, 24));
+  #ifdef PBL_RECT
+    s_textlayer_battery = text_layer_create(GRect(1, 142, 56, 24));
+  #else
+    s_textlayer_battery = text_layer_create(GRect(30, 120, 56, 24));
+  #endif  
   text_layer_set_background_color(s_textlayer_battery, GColorClear);
   text_layer_set_text(s_textlayer_battery, "100%");
   text_layer_set_font(s_textlayer_battery, s_res_gothic_24_bold);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_battery);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_battery));
   
   // s_textlayer_date
-  s_textlayer_date = text_layer_create(GRect(77, -7, 65, 24));
+  #ifdef PBL_RECT
+    s_textlayer_date = text_layer_create(GRect(77, -7, 65, 24));
+  #else
+    s_textlayer_date = text_layer_create(GRect(95, 30, 65, 24));
+  #endif  
   text_layer_set_background_color(s_textlayer_date, GColorClear);
   text_layer_set_text(s_textlayer_date, "DEC 31");
   text_layer_set_text_alignment(s_textlayer_date, GTextAlignmentRight);
   text_layer_set_font(s_textlayer_date, s_res_gothic_24_bold);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_date);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_date));
   
   // s_textlayer_dow
-  s_textlayer_dow = text_layer_create(GRect(99, 12, 42, 24));
+  #ifdef PBL_RECT
+    s_textlayer_dow = text_layer_create(GRect(99, 12, 42, 24));
+  #else
+    s_textlayer_dow = text_layer_create(GRect(120, 50, 42, 24));
+  #endif  
   text_layer_set_background_color(s_textlayer_dow, GColorClear);
   text_layer_set_text(s_textlayer_dow, "WED");
   text_layer_set_text_alignment(s_textlayer_dow, GTextAlignmentRight);
   text_layer_set_font(s_textlayer_dow, s_res_gothic_24_bold);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_dow);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_dow));
   
   // s_textlayer_ampm
-  s_textlayer_ampm = text_layer_create(GRect(1, 122, 48, 24));
+  #ifdef PBL_RECT
+    s_textlayer_ampm = text_layer_create(GRect(1, 122, 48, 24));
+  #else
+    s_textlayer_ampm = text_layer_create(GRect(20, 100, 48, 24));
+  #endif  
   text_layer_set_background_color(s_textlayer_ampm, GColorClear);
   text_layer_set_text(s_textlayer_ampm, "AM");
   text_layer_set_font(s_textlayer_ampm, s_res_gothic_24_bold);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_ampm);
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_ampm));
   
   // s_textlayer_bt
   s_textlayer_bt = text_layer_create(GRect(0, 0, 0, 0));
   text_layer_set_background_color(s_textlayer_bt, GColorClear);
-  text_layer_set_text(s_textlayer_bt, "Bluetooth disconnected");
-  layer_add_child(window_get_root_layer(s_window), (Layer *)s_textlayer_bt);
+  #ifdef PBL_RECT
+    text_layer_set_text(s_textlayer_bt, "Bluetooth disconnected");
+  #else
+    text_layer_set_text(s_textlayer_bt, "Bluetooth disconnect");
+  #endif  
+  layer_add_child(win_layer, text_layer_get_layer(s_textlayer_bt));
   
   
   #ifdef PBL_COLOR
@@ -142,6 +184,10 @@ void display_bt_layer(bool connected) {
   if (connected) {
     layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(0, 0, 0, 0));
   } else {
-    layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(0, 1, 83, 34));
+    #ifdef PBL_RECT
+      layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(0, 1, 83, 34));
+    #else
+      layer_set_frame(text_layer_get_layer(s_textlayer_bt), GRect(26, 17, 83, 34));
+    #endif
   }
 }
